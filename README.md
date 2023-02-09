@@ -2,7 +2,7 @@
 ### Telegram bot that updates some chat's or channel's description
 
 
-To run this you need to run following
+To run bot you need to enter in terminal following:
 ```
 git clone https://github.com/bossa96demo/ud_bot
 cd ud_bot
