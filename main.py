@@ -1,8 +1,6 @@
 """
 Simple Bot to change description for today's date
 """
-
-import logging
 from typing import Optional, Tuple
 
 from telegram import __version__ as TG_VER
@@ -10,14 +8,7 @@ from telegram import __version__ as TG_VER
 try:
     from telegram import __version_info__
 except ImportError:
-    __version_info__ = (0, 0, 0, 0, 0)  # type: ignore[assignment]
-
-if __version_info__ < (20, 0, 0, "alpha", 1):
-    raise RuntimeError(
-        f"This example is not compatible with your current PTB version {TG_VER}. To view the "
-        f"{TG_VER} version of this example, "
-        f"visit https://docs.python-telegram-bot.org/en/v{TG_VER}/examples.html"
-    )
+    __version_info__ = (0, 0, 0, 0, 0)
 from telegram import Chat, ChatMember, ChatMemberUpdated, Update
 from telegram.constants import ParseMode
 from telegram.ext import (
@@ -30,15 +21,6 @@ from telegram.ext import (
 )
 import calendar
 import datetime
-# Enable logging
-
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-
-logger = logging.getLogger(__name__)
-
-
 
 async def greet_chat_members(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Greets new users in chats and announces when someone leaves"""
@@ -68,8 +50,10 @@ async def change_description(update: Update, context: ContextTypes.DEFAULT_TYPE)
     date_in_words = str(today.day) + ' ' + calendar.month_name[today.month]
     description = 'Happy ' + date_in_words + '!!🎉'
     await context.bot.setChatDescription(channel_id, description)
+    print("\ndescription successfully changed\n")
 
 def main() -> None:
+    print("bot was started\n\n")
     """Start the bot."""
     # Create the Application and pass it your bot's token.
     application = Application.builder().token("YOUR TOKEN HERE").build()
